@@ -9,7 +9,7 @@ const input = document.getElementById("addImage");
 // ベース画像（固定）
 // ===============================
 const baseImage = new Image();
-baseImage.src = "assets/images/base.png"; // 初期表示したい画像
+baseImage.src = "images/base.png"; // 初期表示したい画像
 
 let baseX = 0;
 let baseY = 0;
