@@ -4,7 +4,7 @@ const input = document.getElementById("addImage");
 
 // ===== ベース画像 =====
 const baseImage = new Image();
-baseImage.src = "base.png"; // 同じフォルダに置く
+baseImage.src = "event_news_bg.png";
 let baseX, baseY;
 
 // ===== 追加画像 =====
