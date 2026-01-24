@@ -61,15 +61,13 @@ function draw() {
   // ===== 穴を開ける =====
   ctx.save();
   ctx.globalCompositeOperation = "destination-out";
-  
- ctx.strokeStyle = "red";
-const FRAME_WINDOW = {
-  x: 20,
-  y: 20,
-  width: 20,
-  height: 20
-);
 
+  ctx.fillRect(
+    FRAME_WINDOW.x,
+    FRAME_WINDOW.y,
+    FRAME_WINDOW.width,
+    FRAME_WINDOW.height
+  );
 
   ctx.restore();
 }
