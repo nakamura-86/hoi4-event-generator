@@ -55,22 +55,23 @@ function draw() {
     ctx.drawImage(obj.img, obj.x, obj.y, w, h);
   }
 
-  // ===== フレーム窓でクリップ =====
+  // ===== フレーム描画 =====
+  ctx.drawImage(background, 0, 0);
+
+  // ===== 穴を開ける =====
   ctx.save();
-  ctx.beginPath();
-  ctx.rect(
+  ctx.globalCompositeOperation = "destination-out";
+
+  ctx.fillRect(
     FRAME_WINDOW.x,
     FRAME_WINDOW.y,
     FRAME_WINDOW.width,
     FRAME_WINDOW.height
   );
-  ctx.clip();
-
-  // フレーム描画（手前）
-  ctx.drawImage(background, 0, 0);
 
   ctx.restore();
 }
+
 
 
 
