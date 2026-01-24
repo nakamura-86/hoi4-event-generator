@@ -1,39 +1,54 @@
+// ===============================
+// Canvas 初期設定
+// ===============================
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const input = document.getElementById("addImage");
 
-// ===== ベース画像 =====
+// ===============================
+// ベース画像（固定）
+// ===============================
 const baseImage = new Image();
-baseImage.src = "event_news_bg.png";
-let baseX, baseY;
+baseImage.src = "assets/images/base.png"; // 初期表示したい画像
 
-// ===== 追加画像 =====
+let baseX = 0;
+let baseY = 0;
+
+// ===============================
+// 追加画像（ドラッグ可能）
+// ===============================
 const overlays = [];
-let activeImage = null;
+let active = null;
 let offsetX = 0;
 let offsetY = 0;
 
-// ベース画像読み込み
+// ===============================
+// ベース画像読み込み完了
+// ===============================
 baseImage.onload = () => {
   baseX = (canvas.width - baseImage.width) / 2;
   baseY = (canvas.height - baseImage.height) / 2;
   draw();
 };
 
-// 再描画
+// ===============================
+// 再描画処理
+// ===============================
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 固定ベース
+  // 固定ベース画像
   ctx.drawImage(baseImage, baseX, baseY);
 
   // 追加画像
-  overlays.forEach(img => {
-    ctx.drawImage(img.image, img.x, img.y);
+  overlays.forEach(o => {
+    ctx.drawImage(o.image, o.x, o.y);
   });
 }
 
-// 追加画像読み込み
+// ===============================
+// 追加画像の読み込み
+// ===============================
 input.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -53,16 +68,19 @@ input.addEventListener("change", (e) => {
   };
   reader.readAsDataURL(file);
 
-  input.value = ""; // 同じ画像を再度追加できるように
+  // 同じ画像を連続で追加できるように
+  input.value = "";
 });
 
-// マウス押下
+// ===============================
+// マウス操作（ドラッグ）
+// ===============================
 canvas.addEventListener("mousedown", (e) => {
   const rect = canvas.getBoundingClientRect();
   const mx = e.clientX - rect.left;
   const my = e.clientY - rect.top;
 
-  // 上にある画像から判定（逆順）
+  // 上にある画像から判定
   for (let i = overlays.length - 1; i >= 0; i--) {
     const o = overlays[i];
     if (
@@ -71,13 +89,13 @@ canvas.addEventListener("mousedown", (e) => {
       my >= o.y &&
       my <= o.y + o.image.height
     ) {
-      activeImage = o;
+      active = o;
       offsetX = mx - o.x;
       offsetY = my - o.y;
 
       // 最前面に移動
       overlays.splice(i, 1);
-      overlays.push(activeImage);
+      overlays.push(active);
 
       canvas.style.cursor = "grabbing";
       break;
@@ -85,24 +103,22 @@ canvas.addEventListener("mousedown", (e) => {
   }
 });
 
-// マウス移動
 canvas.addEventListener("mousemove", (e) => {
-  if (!activeImage) return;
+  if (!active) return;
 
   const rect = canvas.getBoundingClientRect();
-  activeImage.x = e.clientX - rect.left - offsetX;
-  activeImage.y = e.clientY - rect.top - offsetY;
+  active.x = e.clientX - rect.left - offsetX;
+  active.y = e.clientY - rect.top - offsetY;
 
   draw();
 });
 
-// マウス離す
 canvas.addEventListener("mouseup", () => {
-  activeImage = null;
+  active = null;
   canvas.style.cursor = "grab";
 });
 
 canvas.addEventListener("mouseleave", () => {
-  activeImage = null;
+  active = null;
   canvas.style.cursor = "grab";
 });
