@@ -4,7 +4,7 @@ const input = document.getElementById("imageInput");
 
 // ===== 固定背景画像 =====
 const background = new Image();
-background.src = "image/event_news_bg"; // 最初から表示したい画像
+background.src = "image/event_news_bg.png"; // 最初から表示したい画像
 
 // ===== 可動画像一覧 =====
 let images = [];
