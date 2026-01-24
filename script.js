@@ -48,16 +48,17 @@ input.addEventListener("change", (e) => {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 背景
-  ctx.drawImage(background, 0, 0);
-
-  // 可動画像
+  // 可動画像（奥）
   for (const obj of images) {
     const w = obj.img.width * obj.scale;
     const h = obj.img.height * obj.scale;
     ctx.drawImage(obj.img, obj.x, obj.y, w, h);
   }
+
+  // 固定フレーム（手前）
+  ctx.drawImage(background, 0, 0);
 }
+
 
 // マウス押下
 canvas.addEventListener("mousedown", (e) => {
