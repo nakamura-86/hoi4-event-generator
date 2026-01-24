@@ -61,13 +61,13 @@ function draw() {
   // ===== 穴を開ける =====
   ctx.save();
   ctx.globalCompositeOperation = "destination-out";
-
-  ctx.fillRect(
-    FRAME_WINDOW.x,
-    FRAME_WINDOW.y,
-    FRAME_WINDOW.width,
-    FRAME_WINDOW.height
-  );
+  
+  const FRAME_WINDOW = {
+    x: 80,
+    y: 90,
+    width: 860,
+    height: 360
+  };
 
   ctx.restore();
 }
