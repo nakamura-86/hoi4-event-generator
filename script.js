@@ -48,16 +48,30 @@ input.addEventListener("change", (e) => {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 可動画像（奥）
+  // ===== 追加画像（奥） =====
   for (const obj of images) {
     const w = obj.img.width * obj.scale;
     const h = obj.img.height * obj.scale;
     ctx.drawImage(obj.img, obj.x, obj.y, w, h);
   }
 
-  // 固定フレーム（手前）
+  // ===== フレーム窓でクリップ =====
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(
+    FRAME_WINDOW.x,
+    FRAME_WINDOW.y,
+    FRAME_WINDOW.width,
+    FRAME_WINDOW.height
+  );
+  ctx.clip();
+
+  // フレーム描画（手前）
   ctx.drawImage(background, 0, 0);
+
+  ctx.restore();
 }
+
 
 
 // マウス押下
