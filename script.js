@@ -4,25 +4,25 @@ const input = document.getElementById("imageInput");
 
 // ===== 固定背景画像 =====
 const background = new Image();
-background.src = "image/event_news_bg.png"; // 最初から表示したい画像
+background.src = "image/event_news_bg.png";
 
 // ===== 可動画像一覧 =====
 let images = [];
 
-// ===== ドラッグ管理 =====
+// ===== ドラッグ・選択管理 =====
 let draggingImage = null;
+let selectedImage = null;
 let offsetX = 0;
 let offsetY = 0;
 
-// ===== 背景ロード（★ここが重要）=====
+// 背景ロード
 background.onload = () => {
-  // 画像の実サイズに canvas を合わせる
   canvas.width = background.naturalWidth;
   canvas.height = background.naturalHeight;
   draw();
 };
 
-// ===== 画像追加 =====
+// 画像追加
 input.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -34,7 +34,8 @@ input.addEventListener("change", (e) => {
       images.push({
         img,
         x: 100,
-        y: 100
+        y: 100,
+        scale: 1
       });
       draw();
     };
@@ -43,44 +44,53 @@ input.addEventListener("change", (e) => {
   reader.readAsDataURL(file);
 });
 
-// ===== 描画関数 =====
+// 描画
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 背景は等倍描画（引き伸ばさない）
+  // 背景
   ctx.drawImage(background, 0, 0);
 
   // 可動画像
   for (const obj of images) {
-    ctx.drawImage(obj.img, obj.x, obj.y);
+    const w = obj.img.width * obj.scale;
+    const h = obj.img.height * obj.scale;
+    ctx.drawImage(obj.img, obj.x, obj.y, w, h);
   }
 }
 
-// ===== マウス押下 =====
+// マウス押下
 canvas.addEventListener("mousedown", (e) => {
   const rect = canvas.getBoundingClientRect();
   const mx = e.clientX - rect.left;
   const my = e.clientY - rect.top;
 
-  // 上にある画像を優先して掴む
   for (let i = images.length - 1; i >= 0; i--) {
     const obj = images[i];
+    const w = obj.img.width * obj.scale;
+    const h = obj.img.height * obj.scale;
+
     if (
       mx >= obj.x &&
-      mx <= obj.x + obj.img.width &&
+      mx <= obj.x + w &&
       my >= obj.y &&
-      my <= obj.y + obj.img.height
+      my <= obj.y + h
     ) {
       draggingImage = obj;
+      selectedImage = obj;
       offsetX = mx - obj.x;
       offsetY = my - obj.y;
       canvas.style.cursor = "grabbing";
+
+      // 最前面へ
+      images.splice(i, 1);
+      images.push(obj);
       break;
     }
   }
 });
 
-// ===== マウス移動 =====
+// マウス移動
 canvas.addEventListener("mousemove", (e) => {
   if (!draggingImage) return;
 
@@ -91,7 +101,7 @@ canvas.addEventListener("mousemove", (e) => {
   draw();
 });
 
-// ===== マウス離す =====
+// マウス離す
 canvas.addEventListener("mouseup", stopDrag);
 canvas.addEventListener("mouseleave", stopDrag);
 
@@ -99,3 +109,22 @@ function stopDrag() {
   draggingImage = null;
   canvas.style.cursor = "grab";
 }
+
+// ===== ホイールで拡大縮小 =====
+canvas.addEventListener("wheel", (e) => {
+  if (!selectedImage) return;
+
+  e.preventDefault();
+
+  const zoomSpeed = 0.1;
+  if (e.deltaY < 0) {
+    selectedImage.scale += zoomSpeed;
+  } else {
+    selectedImage.scale -= zoomSpeed;
+  }
+
+  // 拡大縮小制限
+  selectedImage.scale = Math.max(0.1, Math.min(5, selectedImage.scale));
+
+  draw();
+}, { passive: false });
