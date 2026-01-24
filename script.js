@@ -2,73 +2,95 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const input = document.getElementById("imageInput");
 
-let img = new Image();
-let imgX = 100;
-let imgY = 100;
+// ===== 固定背景画像 =====
+const background = new Image();
+background.src = "image/event_news_bg"; // 最初から表示したい画像
 
-let isDragging = false;
+// ===== 可動画像一覧 =====
+let images = [];
+
+// ===== ドラッグ管理 =====
+let draggingImage = null;
 let offsetX = 0;
 let offsetY = 0;
 
-// 画像読み込み
+// 背景ロード
+background.onload = draw;
+
+// 画像追加
 input.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
 
   const reader = new FileReader();
   reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      images.push({
+        img,
+        x: 100,
+        y: 100
+      });
+      draw();
+    };
     img.src = reader.result;
   };
   reader.readAsDataURL(file);
 });
 
-// 描画
-img.onload = () => {
-  draw();
-};
-
+// 描画関数
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(img, imgX, imgY);
+
+  // 背景（動かせない）
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+  // 可動画像
+  for (const obj of images) {
+    ctx.drawImage(obj.img, obj.x, obj.y);
+  }
 }
 
 // マウス押下
 canvas.addEventListener("mousedown", (e) => {
   const rect = canvas.getBoundingClientRect();
-  const mouseX = e.clientX - rect.left;
-  const mouseY = e.clientY - rect.top;
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
 
-  if (
-    mouseX >= imgX &&
-    mouseX <= imgX + img.width &&
-    mouseY >= imgY &&
-    mouseY <= imgY + img.height
-  ) {
-    isDragging = true;
-    offsetX = mouseX - imgX;
-    offsetY = mouseY - imgY;
-    canvas.style.cursor = "grabbing";
+  // 上にある画像を優先して掴む
+  for (let i = images.length - 1; i >= 0; i--) {
+    const obj = images[i];
+    if (
+      mx >= obj.x &&
+      mx <= obj.x + obj.img.width &&
+      my >= obj.y &&
+      my <= obj.y + obj.img.height
+    ) {
+      draggingImage = obj;
+      offsetX = mx - obj.x;
+      offsetY = my - obj.y;
+      canvas.style.cursor = "grabbing";
+      break;
+    }
   }
 });
 
 // マウス移動
 canvas.addEventListener("mousemove", (e) => {
-  if (!isDragging) return;
+  if (!draggingImage) return;
 
   const rect = canvas.getBoundingClientRect();
-  imgX = e.clientX - rect.left - offsetX;
-  imgY = e.clientY - rect.top - offsetY;
+  draggingImage.x = e.clientX - rect.left - offsetX;
+  draggingImage.y = e.clientY - rect.top - offsetY;
 
   draw();
 });
 
 // マウス離す
-canvas.addEventListener("mouseup", () => {
-  isDragging = false;
-  canvas.style.cursor = "grab";
-});
+canvas.addEventListener("mouseup", stopDrag);
+canvas.addEventListener("mouseleave", stopDrag);
 
-canvas.addEventListener("mouseleave", () => {
-  isDragging = false;
+function stopDrag() {
+  draggingImage = null;
   canvas.style.cursor = "grab";
-});
+}
