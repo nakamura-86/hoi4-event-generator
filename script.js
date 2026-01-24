@@ -2,36 +2,34 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const input = document.getElementById("imageInput");
 
-/* =========================
-   背景画像（固定）
-========================= */
+// ===== 固定背景画像 =====
 const background = new Image();
-background.src = "event_news_bg.png";
+background.src = "image/event_news_bg.png"; // 最初から表示したい画像
 
-/* =========================
-   可動画像一覧
-========================= */
+// ===== 可動画像一覧 =====
 let images = [];
 
-/* =========================
-   ドラッグ管理
-========================= */
+images.push({
+  img,
+  x: 100,
+  y: 100,
+  scale: 1
+});
+
+// ===== ドラッグ管理 =====
 let draggingImage = null;
 let offsetX = 0;
 let offsetY = 0;
 
-/* =========================
-   背景ロード → canvasサイズ調整
-========================= */
+// 背景ロード
 background.onload = () => {
   canvas.width = background.naturalWidth;
   canvas.height = background.naturalHeight;
   draw();
 };
 
-/* =========================
-   画像追加
-========================= */
+
+// 画像追加
 input.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -41,10 +39,9 @@ input.addEventListener("change", (e) => {
     const img = new Image();
     img.onload = () => {
       images.push({
-        img: img,
-        x: 50,
-        y: 50,
-        scale: 1
+        img,
+        x: 100,
+        y: 100
       });
       draw();
     };
@@ -53,16 +50,12 @@ input.addEventListener("change", (e) => {
   reader.readAsDataURL(file);
 });
 
-/* =========================
-   描画
-========================= */
+// 描画関数
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 背景（原寸）
   ctx.drawImage(background, 0, 0);
 
-  // 可動画像
   for (const obj of images) {
     const w = obj.img.width * obj.scale;
     const h = obj.img.height * obj.scale;
@@ -70,15 +63,32 @@ function draw() {
   }
 }
 
-/* =========================
-   マウス押下（掴む）
-========================= */
+// マウス押下
+canvas.addEventListener("wheel", (e) => {
+  if (!draggingImage) return;
+
+  e.preventDefault();
+
+  const scaleAmount = 0.1;
+  if (e.deltaY < 0) {
+    draggingImage.scale += scaleAmount;
+  } else {
+    draggingImage.scale -= scaleAmount;
+  }
+
+  // 拡大縮小の下限
+  draggingImage.scale = Math.max(0.1, draggingImage.scale);
+
+  draw();
+}, { passive: false });
+
+
+// マウス移動
 canvas.addEventListener("mousedown", (e) => {
   const rect = canvas.getBoundingClientRect();
   const mx = e.clientX - rect.left;
   const my = e.clientY - rect.top;
 
-  // 上にある画像を優先
   for (let i = images.length - 1; i >= 0; i--) {
     const obj = images[i];
     const w = obj.img.width * obj.scale;
@@ -99,22 +109,8 @@ canvas.addEventListener("mousedown", (e) => {
   }
 });
 
-/* =========================
-   マウス移動（ドラッグ）
-========================= */
-canvas.addEventListener("mousemove", (e) => {
-  if (!draggingImage) return;
 
-  const rect = canvas.getBoundingClientRect();
-  draggingImage.x = e.clientX - rect.left - offsetX;
-  draggingImage.y = e.clientY - rect.top - offsetY;
-
-  draw();
-});
-
-/* =========================
-   マウス離す
-========================= */
+// マウス離す
 canvas.addEventListener("mouseup", stopDrag);
 canvas.addEventListener("mouseleave", stopDrag);
 
@@ -122,28 +118,3 @@ function stopDrag() {
   draggingImage = null;
   canvas.style.cursor = "grab";
 }
-
-/* =========================
-   ホイール拡大縮小
-========================= */
-canvas.addEventListener(
-  "wheel",
-  (e) => {
-    if (!draggingImage) return;
-
-    e.preventDefault();
-
-    const scaleStep = 0.1;
-    if (e.deltaY < 0) {
-      draggingImage.scale += scaleStep;
-    } else {
-      draggingImage.scale -= scaleStep;
-    }
-
-    // 最小サイズ制限
-    draggingImage.scale = Math.max(0.1, draggingImage.scale);
-
-    draw();
-  },
-  { passive: false }
-);
