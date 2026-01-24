@@ -15,7 +15,12 @@ let offsetX = 0;
 let offsetY = 0;
 
 // 背景ロード
-background.onload = draw;
+background.onload = () => {
+  canvas.width = background.naturalWidth;
+  canvas.height = background.naturalHeight;
+  draw();
+};
+
 
 // 画像追加
 input.addEventListener("change", (e) => {
@@ -42,8 +47,8 @@ input.addEventListener("change", (e) => {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 背景（動かせない）
-  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+  // 等倍で描画（引き伸ばさない）
+  ctx.drawImage(background, 0, 0);
 
   // 可動画像
   for (const obj of images) {
