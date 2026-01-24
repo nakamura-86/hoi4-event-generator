@@ -62,12 +62,14 @@ function draw() {
   ctx.save();
   ctx.globalCompositeOperation = "destination-out";
   
-  const FRAME_WINDOW = {
-    x: 80,
-    y: 90,
-    width: 860,
-    height: 360
-  };
+ ctx.strokeStyle = "red";
+const FRAME_WINDOW = {
+  x: 20,
+  y: 20,
+  width: 20,
+  height: 20
+);
+
 
   ctx.restore();
 }
