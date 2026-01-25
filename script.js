@@ -5,7 +5,6 @@ const input = document.getElementById("imageInput");
 // ===== txt =====
 const texts = {
   title: {
-    ctx.textAlign = "center";
     text: "",
     x: 250,
     y: 120,
@@ -13,7 +12,6 @@ const texts = {
     color: "white"
   },
   description: {
-    ctx.textAlign = "left";
     text: "",
     x: 60,
     y: 290,
@@ -21,7 +19,6 @@ const texts = {
     color: "white"
   },
   option: {
-    ctx.textAlign = "center";
     text: "",
     x: 250,
     y: 500,
