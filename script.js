@@ -126,25 +126,6 @@ function draw() {
     ctx.fillText(t.text, t.x, t.y);
     ctx.restore();
 }
-  // ===== テキスト折り返し =====
-for (const key in texts) {
-  const t = texts[key];
-  if (!t.text) continue;
-
-  ctx.save();
-  ctx.font = t.font;
-  ctx.fillStyle = t.color;
-  ctx.textBaseline = "top";
-  ctx.textAlign = t.align;   // ← ここがポイント
-
-  if (key === "description") {
-    wrapText(ctx, t.text, t.x, t.y, t.width, 20);
-  } else {
-    ctx.fillText(t.text, t.x, t.y);
-  }
-
-  ctx.restore();
-}
 
 
 }
