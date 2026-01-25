@@ -2,6 +2,33 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const input = document.getElementById("imageInput");
 
+const texts = {
+  title: {
+    text: "",
+    x: 250,
+    y: 250,
+    font: "bold 28px serif",
+    color: "black",
+    align: "center"
+  },
+  description: {
+    text: "",
+    x: 55,
+    y: 290,
+    width: 300,
+    font: "16px serif",
+    color: "black",
+    align: "left"
+  },
+  option: {
+    text: "",
+    x: 250,
+    y: 515,
+    font: "16px serif",
+    color: "white",
+    align: "center"
+  }
+};
 
 
 
@@ -65,36 +92,6 @@ input.addEventListener("change", (e) => {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-// ===== title =====
-ctx.font = texts.title.font;
-ctx.fillStyle = texts.title.color;
-ctx.textAlign = "center";   // ← 追加
-ctx.fillText(
-  texts.title.text,
-  texts.title.x,            // ← 座標そのまま
-  texts.title.y
-);
-
-// ===== option =====
-ctx.font = texts.option.font;
-ctx.fillStyle = texts.option.color;
-ctx.textAlign = "center";   // ← 追加
-ctx.fillText(
-  texts.option.text,
-  texts.option.x,           // ← 座標そのまま
-  texts.option.y
-);
-
-// ===== description（左揃えに戻す）=====
-ctx.font = texts.description.font;
-ctx.fillStyle = texts.description.color;
-ctx.textAlign = "left";     // ← 忘れず戻す
-ctx.fillText(
-  texts.description.text,
-  texts.description.x,
-  texts.description.y
-);
-  
   // ===== 挿入画像（穴の中だけ） =====
   ctx.save();
   ctx.beginPath();
@@ -121,16 +118,21 @@ ctx.fillText(
   for (const key in texts) {
     const t = texts[key];
     if (!t.text) continue;
-  
+
     ctx.save();
     ctx.font = t.font;
     ctx.fillStyle = t.color;
     ctx.textBaseline = "top";
-    ctx.fillText(t.text, t.x, t.y);
+    ctx.textAlign = t.align || "left"; // ★これが必要
+
+    if (key === "description" && t.width) {
+      wrapText(ctx, t.text, t.x, t.y, t.width, 20);
+    } else {
+      ctx.fillText(t.text, t.x, t.y);
+    }
+
     ctx.restore();
-}
-
-
+  }
 }
 
 
