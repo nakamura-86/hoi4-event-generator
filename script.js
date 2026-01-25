@@ -109,31 +109,68 @@ function draw() {
     ctx.drawImage(obj.img, obj.x, obj.y, w, h);
   }
 
-  ctx.restore(); // clip解除
+  ctx.restore();
 
-  // ===== フレームを最前面 =====
-  ctx.drawImage(background, 0, 0);
-
-  // ===== テキスト描画 =====
-  for (const key in texts) {
-    const t = texts[key];
-    if (!t.text) continue;
-
+  // =========================
+  // ===== title（中央揃い）=====
+  // =========================
+  if (texts.title.text) {
     ctx.save();
-    ctx.font = t.font;
-    ctx.fillStyle = t.color;
+    ctx.font = texts.title.font;
+    ctx.fillStyle = texts.title.color;
     ctx.textBaseline = "top";
-    ctx.textAlign = t.align || "left"; // ★これが必要
+    ctx.textAlign = "center";
+    ctx.fillText(
+      texts.title.text,
+      texts.title.x,
+      texts.title.y
+    );
+    ctx.restore();
+  }
 
-    if (key === "description" && t.width) {
-      wrapText(ctx, t.text, t.x, t.y, t.width, 20);
-    } else {
-      ctx.fillText(t.text, t.x, t.y);
-    }
+  // ==============================
+  // ===== description（左揃い・折返し）=====
+  // ==============================
+  if (texts.description.text) {
+    ctx.save();
+    ctx.font = texts.description.font;
+    ctx.fillStyle = texts.description.color;
+    ctx.textBaseline = "top";
+    ctx.textAlign = "left";
+
+    wrapText(
+      ctx,
+      texts.description.text,
+      texts.description.x,
+      texts.description.y,
+      texts.description.width,
+      20
+    );
 
     ctx.restore();
   }
+
+  // =========================
+  // ===== option（中央揃い）=====
+  // =========================
+  if (texts.option.text) {
+    ctx.save();
+    ctx.font = texts.option.font;
+    ctx.fillStyle = texts.option.color;
+    ctx.textBaseline = "top";
+    ctx.textAlign = "center";
+    ctx.fillText(
+      texts.option.text,
+      texts.option.x,
+      texts.option.y
+    );
+    ctx.restore();
+  }
+
+  // ===== フレームを最前面 =====
+  ctx.drawImage(background, 0, 0);
 }
+
 
 
 
