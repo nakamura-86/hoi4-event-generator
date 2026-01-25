@@ -9,14 +9,14 @@ const texts = {
     x: 250,
     y: 300,
     font: "bold 28px serif",
-    color: "white"
+    color: "black"
   },
   description: {
     text: "",
     x: 55,
     y: 290,
     font: "16px serif",
-    color: "white"
+    color: "black"
   },
   option: {
     text: "",
