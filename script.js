@@ -5,9 +5,9 @@ const input = document.getElementById("imageInput");
 const texts = {
   title: {
     text: "",
-    x: 250,
-    y: 250,
-    font: "bold 20px serif",
+    x: 252,
+    y: 252,
+    font: "bold 18px serif",
     color: "black",
     align: "center"
   },
@@ -24,7 +24,7 @@ const texts = {
     text: "",
     x: 253,
     y: 518,
-    font: "16px serif",
+    font: "14px serif",
     color: "white",
     align: "center"
   }
