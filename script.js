@@ -57,7 +57,20 @@ function draw() {
     const h = obj.img.height * obj.scale;
     ctx.drawImage(obj.img, obj.x, obj.y, w, h);
   }
+
+  // ===== デバッグ用：穴の位置確認 =====
+  ctx.save();
+  ctx.strokeStyle = "red";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(
+    FRAME_WINDOW.x,
+    FRAME_WINDOW.y,
+    FRAME_WINDOW.width,
+    FRAME_WINDOW.height
+  );
+  ctx.restore();
 }
+
 
 // マウス押下
 canvas.addEventListener("mousedown", (e) => {
