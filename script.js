@@ -234,3 +234,24 @@ document.getElementById("optionInput").addEventListener("input", (e) => {
   draw();
 });
 
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  let line = "";
+  let yy = y;
+
+  for (const ch of text) {
+    const testLine = line + ch;
+    const metrics = ctx.measureText(testLine);
+
+    if (metrics.width > maxWidth && line !== "") {
+      ctx.fillText(line, x, yy);
+      line = ch;
+      yy += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+
+  ctx.fillText(line, x, yy);
+}
+
+
