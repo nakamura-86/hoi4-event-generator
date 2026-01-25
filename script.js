@@ -109,6 +109,19 @@ function draw() {
   // ===== フレームを最前面 =====
   ctx.drawImage(background, 0, 0);
 
+  // ===== テキスト描画 =====
+  for (const key in texts) {
+    const t = texts[key];
+    if (!t.text) continue;
+  
+    ctx.save();
+    ctx.font = t.font;
+    ctx.fillStyle = t.color;
+    ctx.textBaseline = "top";
+    ctx.fillText(t.text, t.x, t.y);
+    ctx.restore();
+}
+
 }
 
 
