@@ -135,8 +135,21 @@ for (const key in texts) {
 }
 
 
+}
 
+function drawDescription(ctx, t) {
+  const lines = t.text.split("\n"); // ← Enterで分割
+  let yy = t.y;
 
+  for (const line of lines) {
+    wrapText(ctx, line, t.x, yy, t.width, 16);
+
+    // 次の行へ（wrapText が何行使ったか分からないので余裕を持たせる）
+    const estimatedLines =
+      Math.ceil(ctx.measureText(line).width / t.width) || 1;
+
+    yy += estimatedLines * 16;
+  }
 }
 
 
