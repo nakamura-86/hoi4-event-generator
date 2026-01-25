@@ -109,9 +109,12 @@ function draw() {
     ctx.drawImage(obj.img, obj.x, obj.y, w, h);
   }
 
-  ctx.restore();
+  ctx.restore(); // clip解除
 
-  // ===== テキスト描画（★フレームより先） =====
+  // ===== フレームを最前面 =====
+  ctx.drawImage(background, 0, 0);
+
+  // ===== テキスト描画 =====
   for (const key in texts) {
     const t = texts[key];
     if (!t.text) continue;
@@ -120,7 +123,7 @@ function draw() {
     ctx.font = t.font;
     ctx.fillStyle = t.color;
     ctx.textBaseline = "top";
-    ctx.textAlign = t.align || "left";
+    ctx.textAlign = t.align || "left"; // ★これが必要
 
     if (key === "description" && t.width) {
       wrapText(ctx, t.text, t.x, t.y, t.width, 20);
@@ -130,11 +133,7 @@ function draw() {
 
     ctx.restore();
   }
-
-  // ===== フレームを最前面 =====
-  ctx.drawImage(background, 0, 0);
 }
-
 
 
 
