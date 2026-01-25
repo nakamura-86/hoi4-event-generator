@@ -9,7 +9,6 @@ const texts = {
     x: 250,
     y: 250,
     font: "bold 28px serif",
-    ctx.textAlign = "center";
     color: "black"
   },
   description: {
@@ -18,7 +17,6 @@ const texts = {
     y: 290,
     width: 100,
     font: "16px serif",
-    ctx.textAlign = "center";
     color: "black"
   },
   option: {
@@ -26,7 +24,6 @@ const texts = {
     x: 250,
     y: 515,
     font: "16px serif",
-    ctx.textAlign = "center";
     color: "white"
   }
 };
