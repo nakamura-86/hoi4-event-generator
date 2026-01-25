@@ -5,7 +5,7 @@ const input = document.getElementById("imageInput");
 const texts = {
   title: {
     text: "",
-    x: 252,
+    x: 254,
     y: 258,
     font: "bold 18px serif",
     color: "black",
