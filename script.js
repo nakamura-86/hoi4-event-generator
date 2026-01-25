@@ -10,7 +10,6 @@ const texts = {
     y: 250,
     font: "bold 28px serif",
     color: "black",
-  label.textAlign = "center",
   },
   description: {
     text: "",
@@ -19,7 +18,6 @@ const texts = {
     width: 300,
     font: "16px serif",
     color: "black",
-  label.textAlign = "center",
   },
   option: {
     text: "",
@@ -27,7 +25,6 @@ const texts = {
     y: 515,
     font: "16px serif",
     color: "white",
-  label.textAlign = "center",
   }
 };
 
