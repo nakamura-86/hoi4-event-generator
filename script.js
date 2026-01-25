@@ -6,23 +6,23 @@ const texts = {
   title: {
     text: "",
     x: 252,
-    y: 252,
+    y: 258,
     font: "bold 18px serif",
     color: "black",
     align: "center"
   },
   description: {
     text: "",
-    x: 55,
+    x: 50,
     y: 290,
-    width: 300,
+    width: 20,
     font: "12px serif",
     color: "black",
     align: "left"
   },
   option: {
     text: "",
-    x: 253,
+    x: 255,
     y: 518,
     font: "14px serif",
     color: "white",
