@@ -208,3 +208,20 @@ window.addEventListener("keydown", (e) => {
   }
 });
 
+// ===== txt =====
+document.getElementById("titleInput").addEventListener("input", (e) => {
+  texts.title.text = e.target.value;
+  draw();
+});
+
+document.getElementById("descriptionInput").addEventListener("input", (e) => {
+  texts.description.text = e.target.value;
+  draw();
+});
+
+document.getElementById("optionInput").addEventListener("input", (e) => {
+  texts.option.text = e.target.value;
+  draw();
+});
+
+
