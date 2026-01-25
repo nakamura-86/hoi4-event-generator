@@ -7,7 +7,7 @@ const texts = {
   title: {
     text: "",
     x: 250,
-    y: 300,
+    y: 250,
     font: "bold 28px serif",
     color: "black"
   },
@@ -22,7 +22,7 @@ const texts = {
   option: {
     text: "",
     x: 250,
-    y: 500,
+    y: 510,
     font: "16px serif",
     color: "white"
   }
