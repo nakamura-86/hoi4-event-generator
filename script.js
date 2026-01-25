@@ -64,6 +64,7 @@ function draw() {
   // ===== 挿入画像（穴の中だけ） =====
   ctx.save();
   ctx.beginPath();
+  ctx.strokeStyle = "red";
   ctx.rect(
     FRAME_WINDOW.x,
     FRAME_WINDOW.y,
