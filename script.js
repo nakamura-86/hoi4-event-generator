@@ -15,7 +15,7 @@ const texts = {
     text: "",
     x: 39,
     y: 290,
-    width: 20,
+    width: 100,
     font: "400 12px 'LINE Seed JP",
     color: "black",
     align: "left"
@@ -123,12 +123,17 @@ for (const key in texts) {
   ctx.font = t.font;
   ctx.fillStyle = t.color;
   ctx.textBaseline = "top";
-  ctx.textAlign = t.align;   // ★ここが中心
+  ctx.textAlign = t.align;
 
-  ctx.fillText(t.text, t.x, t.y);
+  if (key === "description") {
+    wrapText(ctx, t.text, t.x, t.y, t.width, 16);
+  } else {
+    ctx.fillText(t.text, t.x, t.y);
+  }
 
   ctx.restore();
 }
+
 
 
 
