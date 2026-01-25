@@ -2,42 +2,36 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const input = document.getElementById("imageInput");
 
-
 // ===== title =====
 ctx.font = texts.title.font;
 ctx.fillStyle = texts.title.color;
-ctx.textAlign = "center";          // ← 中央揃え
+ctx.textAlign = "center";   // ← 追加
 ctx.fillText(
   texts.title.text,
-  canvasWidth / 2,                 // ← 中央X
+  texts.title.x,            // ← 座標そのまま
   texts.title.y
-    x: 250,            
-    y: 250,
-);
-
-// ===== description =====
-ctx.font = texts.description.font;
-ctx.fillStyle = texts.description.color;
-ctx.textAlign = "center";          // ← 中央揃え
-ctx.fillText(
-  texts.description.text,
-  canvasWidth / 2,                 // ← 中央X
-  texts.description.y
-    x: 55,              
-    y: 290,
 );
 
 // ===== option =====
 ctx.font = texts.option.font;
 ctx.fillStyle = texts.option.color;
-ctx.textAlign = "center";          // ← 中央揃え
+ctx.textAlign = "center";   // ← 追加
 ctx.fillText(
   texts.option.text,
-  canvasWidth / 2,                 // ← 中央X
+  texts.option.x,           // ← 座標そのまま
   texts.option.y
-    x: 250,             
-    y: 515
 );
+
+// ===== description（左揃えに戻す）=====
+ctx.font = texts.description.font;
+ctx.fillStyle = texts.description.color;
+ctx.textAlign = "left";     // ← 忘れず戻す
+ctx.fillText(
+  texts.description.text,
+  texts.description.x,
+  texts.description.y
+);
+
 
 
 // ===== 切り抜き領域 =====
