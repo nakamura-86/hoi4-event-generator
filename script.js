@@ -15,14 +15,14 @@ const texts = {
     text: "",
     x: 55,
     y: 290,
-    width: 360,
+    width: 100,
     font: "16px serif",
     color: "black"
   },
   option: {
     text: "",
     x: 250,
-    y: 510,
+    y: 515,
     font: "16px serif",
     color: "white"
   }
