@@ -84,18 +84,7 @@ function draw() {
   // ===== フレームを最前面 =====
   ctx.drawImage(background, 0, 0);
 
-  // ===== デバッグ用：赤枠を最前面に =====
-  ctx.save();
-  ctx.strokeStyle = "red";
-  ctx.lineWidth = 2;
-  ctx.strokeRect(
-    FRAME_WINDOW.x,
-    FRAME_WINDOW.y,
-    FRAME_WINDOW.width,
-    FRAME_WINDOW.height
-  );
-  ctx.restore();
-}
+
 
 
 
