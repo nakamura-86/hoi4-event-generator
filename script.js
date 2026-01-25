@@ -47,9 +47,9 @@ input.addEventListener("change", (e) => {
 // 描画
 
   const FRAME_WINDOW = {
-  x: 54,
+  x: 55,
   y: 90,
-  width: 405,
+  width: 404,
   height: 153
 };
 
