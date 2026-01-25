@@ -126,7 +126,7 @@ for (const key in texts) {
   ctx.textAlign = t.align;
 
   if (key === "description") {
-    wrapText(ctx, t.text, t.x, t.y, t.width, 16);
+    drawDescription(ctx, t);
   } else {
     ctx.fillText(t.text, t.x, t.y);
   }
