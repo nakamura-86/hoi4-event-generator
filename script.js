@@ -7,7 +7,7 @@ const texts = {
     text: "",
     x: 254,
     y: 258,
-    font: "bold 18px serif",
+    font: "700 18px 'LINE Seed JP",
     color: "black",
     align: "center"
   },
@@ -16,7 +16,7 @@ const texts = {
     x: 45,
     y: 290,
     width: 20,
-    font: "12px serif",
+    font: "400 12px 'LINE Seed JP",
     color: "black",
     align: "left"
   },
@@ -24,7 +24,7 @@ const texts = {
     text: "",
     x: 255,
     y: 520,
-    font: "14px serif",
+    font: "400 14px 'LINE Seed JP",
     color: "white",
     align: "center"
   }
@@ -234,4 +234,3 @@ document.getElementById("optionInput").addEventListener("input", (e) => {
   draw();
 });
 
-今こんな感じ
