@@ -2,6 +2,14 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const input = document.getElementById("imageInput");
 
+// ===== 切り抜き領域 =====
+  const FRAME_WINDOW = {
+  x: 55,
+  y: 90,
+  width: 404,
+  height: 153
+};
+
 // ===== 固定背景画像 =====
 const background = new Image();
 background.src = "image/event_news_bg.png";
@@ -50,13 +58,6 @@ input.addEventListener("change", (e) => {
 });
 
 // 描画
-
-  const FRAME_WINDOW = {
-  x: 55,
-  y: 90,
-  width: 404,
-  height: 153
-};
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
