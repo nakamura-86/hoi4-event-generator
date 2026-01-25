@@ -7,7 +7,7 @@ const texts = {
     text: "",
     x: 250,
     y: 250,
-    font: "bold 28px serif",
+    font: "bold 20px serif",
     color: "black",
     align: "center"
   },
@@ -16,14 +16,14 @@ const texts = {
     x: 55,
     y: 290,
     width: 300,
-    font: "16px serif",
+    font: "12px serif",
     color: "black",
     align: "left"
   },
   option: {
     text: "",
-    x: 250,
-    y: 515,
+    x: 253,
+    y: 518,
     font: "16px serif",
     color: "white",
     align: "center"
