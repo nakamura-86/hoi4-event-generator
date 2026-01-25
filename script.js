@@ -7,13 +7,13 @@ const texts = {
   title: {
     text: "",
     x: 250,
-    y: 120,
+    y: 300,
     font: "bold 28px serif",
     color: "white"
   },
   description: {
     text: "",
-    x: 60,
+    x: 55,
     y: 290,
     font: "16px serif",
     color: "white"
