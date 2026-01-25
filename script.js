@@ -56,17 +56,30 @@ input.addEventListener("change", (e) => {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 背景
-  ctx.drawImage(background, 0, 0);
+  // ===== 穴の中だけ挿入画像を描画 =====
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(
+    FRAME_WINDOW.x,
+    FRAME_WINDOW.y,
+    FRAME_WINDOW.width,
+    FRAME_WINDOW.height
+  );
+  ctx.clip();
 
-  // 可動画像
+  // 可動画像（赤枠の中だけ見える）
   for (const obj of images) {
     const w = obj.img.width * obj.scale;
     const h = obj.img.height * obj.scale;
     ctx.drawImage(obj.img, obj.x, obj.y, w, h);
   }
 
-  // ===== デバッグ用：穴の位置確認 =====
+  ctx.restore(); // ← clip解除（超重要）
+
+  // ===== フレームを最前面に描画 =====
+  ctx.drawImage(background, 0, 0);
+
+  // （確認用：赤枠を残したいなら）
   ctx.save();
   ctx.strokeStyle = "red";
   ctx.lineWidth = 2;
@@ -78,6 +91,7 @@ function draw() {
   );
   ctx.restore();
 }
+
 
 
 // マウス押下
