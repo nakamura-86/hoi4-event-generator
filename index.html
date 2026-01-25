@@ -10,30 +10,34 @@
     }
   </style>
 </head>
+
 <body>
 
-<input type="file" id="imageInput" accept="image/*">
-<br><br>
-<canvas id="canvas" width="800" height="600"></canvas>
+  <input type="file" id="imageInput" accept="image/*">
+  <br><br>
 
-<script src="script.js"></script>
-</body>
+  <canvas id="canvas"></canvas>
 
+  <!-- ===== テキストUI ===== -->
   <div id="text-ui">
-  <div>
-    <label>Title</label><br>
-    <input type="text" id="titleInput">
+    <div>
+      <label>Title</label><br>
+      <input type="text" id="titleInput">
+    </div>
+
+    <div>
+      <label>Description</label><br>
+      <textarea id="descriptionInput"></textarea>
+    </div>
+
+    <div>
+      <label>Option</label><br>
+      <input type="text" id="optionInput">
+    </div>
   </div>
 
-  <div>
-    <label>Description</label><br>
-    <textarea id="descriptionInput"></textarea>
-  </div>
+  <!-- JSは body の一番下 -->
+  <script src="script.js"></script>
 
-  <div>
-    <label>Option</label><br>
-    <input type="text" id="optionInput">
-  </div>
-</div>
-
+</body>
 </html>
