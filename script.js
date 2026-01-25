@@ -13,7 +13,7 @@ const texts = {
   },
   description: {
     text: "",
-    x: 50,
+    x: 45,
     y: 290,
     width: 20,
     font: "12px serif",
@@ -23,7 +23,7 @@ const texts = {
   option: {
     text: "",
     x: 255,
-    y: 518,
+    y: 520,
     font: "14px serif",
     color: "white",
     align: "center"
