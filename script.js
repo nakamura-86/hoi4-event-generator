@@ -271,5 +271,20 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
 
   ctx.fillText(line, x, yy);
 }
+// ===== 保存 =====
+document.getElementById("exportBtn").addEventListener("click", () => {
+  // 最新状態を描画（念のため）
+  draw();
 
+  // PNGデータ取得
+  const dataURL = canvas.toDataURL("image/png");
+
+  // ダウンロード用リンク作成
+  const a = document.createElement("a");
+  a.href = dataURL;
+  a.download = "event_image.png";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+});
 
