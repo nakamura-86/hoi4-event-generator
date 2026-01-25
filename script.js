@@ -13,7 +13,7 @@ const texts = {
   },
   description: {
     text: "",
-    x: 42,
+    x: 39,
     y: 290,
     width: 20,
     font: "400 12px 'LINE Seed JP",
