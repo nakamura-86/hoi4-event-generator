@@ -45,6 +45,14 @@ input.addEventListener("change", (e) => {
 });
 
 // 描画
+
+  const FRAME_WINDOW = {
+  x: 80,
+  y: 90,
+  width: 860,
+  height: 360
+};
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -68,12 +76,6 @@ function draw() {
     FRAME_WINDOW.width,
     FRAME_WINDOW.height
   );
-  const FRAME_WINDOW = {
-  x: 80,
-  y: 90,
-  width: 860,
-  height: 360
-};
   ctx.restore();
 }
 
