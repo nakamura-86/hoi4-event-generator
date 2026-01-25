@@ -6,14 +6,14 @@ const texts = {
   title: {
     text: "",
     x: 254,
-    y: 258,
-    font: "400 18px 'LINE Seed JP",
+    y: 262,
+    font: "400 16px 'LINE Seed JP",
     color: "black",
     align: "center"
   },
   description: {
     text: "",
-    x: 45,
+    x: 42,
     y: 290,
     width: 20,
     font: "400 12px 'LINE Seed JP",
