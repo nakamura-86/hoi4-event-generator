@@ -15,7 +15,7 @@ const texts = {
     text: "",
     x: 39,
     y: 290,
-    width: 100,
+    width: 450,
     font: "400 12px 'LINE Seed JP",
     color: "black",
     align: "left"
