@@ -7,7 +7,7 @@ const texts = {
     text: "",
     x: 254,
     y: 258,
-    font: "700 18px 'LINE Seed JP",
+    font: "400 18px 'LINE Seed JP",
     color: "black",
     align: "center"
   },
