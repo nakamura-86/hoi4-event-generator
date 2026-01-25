@@ -2,6 +2,31 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const input = document.getElementById("imageInput");
 
+// ===== txt =====
+const texts = {
+  title: {
+    text: "",
+    x: 80,
+    y: 60,
+    font: "bold 28px serif",
+    color: "white"
+  },
+  description: {
+    text: "",
+    x: 80,
+    y: 280,
+    font: "16px serif",
+    color: "white"
+  },
+  option: {
+    text: "",
+    x: 80,
+    y: 420,
+    font: "16px serif",
+    color: "white"
+  }
+};
+
 // ===== 切り抜き領域 =====
   const FRAME_WINDOW = {
   x: 55,
