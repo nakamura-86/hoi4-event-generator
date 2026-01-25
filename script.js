@@ -68,6 +68,12 @@ function draw() {
     FRAME_WINDOW.width,
     FRAME_WINDOW.height
   );
+  const FRAME_WINDOW = {
+  x: 80,
+  y: 90,
+  width: 860,
+  height: 360
+};
   ctx.restore();
 }
 
