@@ -157,3 +157,16 @@ canvas.addEventListener("wheel", (e) => {
 
   draw();
 }, { passive: false });
+
+// ===== 削除機能 =====
+window.addEventListener("keydown", (e) => {
+  if (!selectedImage) return;
+
+  if (e.key === "Delete" || e.key === "Backspace") {
+    images = images.filter(img => img !== selectedImage);
+    selectedImage = null;
+    draggingImage = null;
+    draw();
+  }
+});
+
