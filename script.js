@@ -47,10 +47,10 @@ input.addEventListener("change", (e) => {
 // 描画
 
   const FRAME_WINDOW = {
-  x: 50,
+  x: 45,
   y: 50,
-  width: 860,
-  height: 360
+  width: 500,
+  height: 170
 };
 
 function draw() {
