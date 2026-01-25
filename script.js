@@ -31,11 +31,16 @@ input.addEventListener("change", (e) => {
   reader.onload = () => {
     const img = new Image();
     img.onload = () => {
+      const scale = 1;
+      
+      const w = img.width * scale;
+      const h = img.height * scale;
+      
       images.push({
         img,
-        x: 100,
-        y: 100,
-        scale: 1
+        scale,
+        x: FRAME_WINDOW.x + (FRAME_WINDOW.width - w) / 2,
+        y: FRAME_WINDOW.y + (FRAME_WINDOW.height - h) / 2
       });
       draw();
     };
