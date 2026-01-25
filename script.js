@@ -10,7 +10,6 @@ const texts = {
     y: 300,
     font: "bold 28px serif",
     color: "black"
-    align: "center"
   },
   description: {
     text: "",
@@ -19,7 +18,6 @@ const texts = {
     width: 360,
     font: "16px serif",
     color: "black"
-    align: "left"
   },
   option: {
     text: "",
@@ -27,7 +25,6 @@ const texts = {
     y: 500,
     font: "16px serif",
     color: "white"
-    align: "center"
   }
 };
 
