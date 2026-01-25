@@ -6,27 +6,31 @@ const input = document.getElementById("imageInput");
 const texts = {
   title: {
     text: "",
-    x: 250,
+    x: 250,              // 中心点
     y: 250,
     font: "bold 28px serif",
-    color: "black"
+    color: "black",
+    align: "center"
   },
   description: {
     text: "",
-    x: 55,
+    x: 55,               // 左端
     y: 290,
-    width: 100,
+    width: 300,
     font: "16px serif",
-    color: "black"
+    color: "black",
+    align: "left"
   },
   option: {
     text: "",
-    x: 250,
+    x: 250,              // 中心点
     y: 515,
     font: "16px serif",
-    color: "white"
+    color: "white",
+    align: "center"
   }
 };
+
 
 // ===== 切り抜き領域 =====
   const FRAME_WINDOW = {
@@ -122,6 +126,26 @@ function draw() {
     ctx.fillText(t.text, t.x, t.y);
     ctx.restore();
 }
+  // ===== テキスト折り返し =====
+for (const key in texts) {
+  const t = texts[key];
+  if (!t.text) continue;
+
+  ctx.save();
+  ctx.font = t.font;
+  ctx.fillStyle = t.color;
+  ctx.textBaseline = "top";
+  ctx.textAlign = t.align;   // ← ここがポイント
+
+  if (key === "description") {
+    wrapText(ctx, t.text, t.x, t.y, t.width, 20);
+  } else {
+    ctx.fillText(t.text, t.x, t.y);
+  }
+
+  ctx.restore();
+}
+
 
 }
 
