@@ -109,68 +109,30 @@ function draw() {
     ctx.drawImage(obj.img, obj.x, obj.y, w, h);
   }
 
-  ctx.restore();
-
-  // =========================
-  // ===== title（中央揃い）=====
-  // =========================
-  if (texts.title.text) {
-    ctx.save();
-    ctx.font = texts.title.font;
-    ctx.fillStyle = texts.title.color;
-    ctx.textBaseline = "top";
-    ctx.textAlign = "center";
-    ctx.fillText(
-      texts.title.text,
-      texts.title.x,
-      texts.title.y
-    );
-    ctx.restore();
-  }
-
-  // ==============================
-  // ===== description（左揃い・折返し）=====
-  // ==============================
-  if (texts.description.text) {
-    ctx.save();
-    ctx.font = texts.description.font;
-    ctx.fillStyle = texts.description.color;
-    ctx.textBaseline = "top";
-    ctx.textAlign = "left";
-
-    wrapText(
-      ctx,
-      texts.description.text,
-      texts.description.x,
-      texts.description.y,
-      texts.description.width,
-      20
-    );
-
-    ctx.restore();
-  }
-
-  // =========================
-  // ===== option（中央揃い）=====
-  // =========================
-  if (texts.option.text) {
-    ctx.save();
-    ctx.font = texts.option.font;
-    ctx.fillStyle = texts.option.color;
-    ctx.textBaseline = "top";
-    ctx.textAlign = "center";
-    ctx.fillText(
-      texts.option.text,
-      texts.option.x,
-      texts.option.y
-    );
-    ctx.restore();
-  }
+  ctx.restore(); // clip解除
 
   // ===== フレームを最前面 =====
   ctx.drawImage(background, 0, 0);
+
+// ===== テキスト描画 =====
+for (const key in texts) {
+  const t = texts[key];
+  if (!t.text) continue;
+
+  ctx.save();
+  ctx.font = t.font;
+  ctx.fillStyle = t.color;
+  ctx.textBaseline = "top";
+  ctx.textAlign = t.align;   // ★ここが中心
+
+  ctx.fillText(t.text, t.x, t.y);
+
+  ctx.restore();
 }
 
+
+
+}
 
 
 
@@ -271,3 +233,5 @@ document.getElementById("optionInput").addEventListener("input", (e) => {
   texts.option.text = e.target.value;
   draw();
 });
+
+今こんな感じ
