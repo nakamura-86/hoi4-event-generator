@@ -10,7 +10,6 @@ const texts = {
     y: 250,
     font: "bold 28px serif",
     color: "black",
-    text-align: center;
   },
   description: {
     text: "",
@@ -19,7 +18,6 @@ const texts = {
     width: 300,
     font: "16px serif",
     color: "black",
-    text-align: center;
   },
   option: {
     text: "",
@@ -27,7 +25,6 @@ const texts = {
     y: 515,
     font: "16px serif",
     color: "white",
-    text-align: center;
   }
 };
 
@@ -114,22 +111,18 @@ function draw() {
   // ===== フレームを最前面 =====
   ctx.drawImage(background, 0, 0);
 
-// ===== テキスト描画 =====
-for (const key in texts) {
-  const t = texts[key];
-  if (!t.text) continue;
-
-  ctx.save();
-  ctx.font = t.font;
-  ctx.fillStyle = t.color;
-  ctx.textBaseline = "top";
-  ctx.textAlign = t.align;   // ←★これが無かった
-
-  ctx.fillText(t.text, t.x, t.y);
-
-  ctx.restore();
+  // ===== テキスト描画 =====
+  for (const key in texts) {
+    const t = texts[key];
+    if (!t.text) continue;
+  
+    ctx.save();
+    ctx.font = t.font;
+    ctx.fillStyle = t.color;
+    ctx.textBaseline = "top";
+    ctx.fillText(t.text, t.x, t.y);
+    ctx.restore();
 }
-
 
 
 }
@@ -233,5 +226,3 @@ document.getElementById("optionInput").addEventListener("input", (e) => {
   texts.option.text = e.target.value;
   draw();
 });
-
-
