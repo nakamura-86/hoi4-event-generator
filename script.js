@@ -48,33 +48,16 @@ input.addEventListener("change", (e) => {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // ===== 穴の中だけ描画 =====
-  ctx.save();
-  ctx.beginPath();
-  ctx.rect(
-    FRAME_WINDOW.x,
-    FRAME_WINDOW.y,
-    FRAME_WINDOW.width,
-    FRAME_WINDOW.height
-  );
-  ctx.clip();
+  // 背景
+  ctx.drawImage(background, 0, 0);
 
-  // 挿入画像（穴の中にだけ表示）
+  // 可動画像
   for (const obj of images) {
     const w = obj.img.width * obj.scale;
     const h = obj.img.height * obj.scale;
     ctx.drawImage(obj.img, obj.x, obj.y, w, h);
   }
-
-  ctx.restore(); // ← ここ超重要
-
-  // ===== フレームは最後にそのまま描画 =====
-  ctx.drawImage(background, 0, 0);
 }
-
-
-
-
 
 // マウス押下
 canvas.addEventListener("mousedown", (e) => {
