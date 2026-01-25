@@ -2,31 +2,42 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const input = document.getElementById("imageInput");
 
-// ===== txt =====
-const texts = {
-  title: {
-    text: "",
-    x: 250,              // 中心点
+
+// ===== title =====
+ctx.font = texts.title.font;
+ctx.fillStyle = texts.title.color;
+ctx.textAlign = "center";          // ← 中央揃え
+ctx.fillText(
+  texts.title.text,
+  canvasWidth / 2,                 // ← 中央X
+  texts.title.y
+    x: 250,            
     y: 250,
-    font: "bold 28px serif",
-    color: "black",
-  },
-  description: {
-    text: "",
-    x: 55,               // 左端
+);
+
+// ===== description =====
+ctx.font = texts.description.font;
+ctx.fillStyle = texts.description.color;
+ctx.textAlign = "center";          // ← 中央揃え
+ctx.fillText(
+  texts.description.text,
+  canvasWidth / 2,                 // ← 中央X
+  texts.description.y
+    x: 55,              
     y: 290,
-    width: 300,
-    font: "16px serif",
-    color: "black",
-  },
-  option: {
-    text: "",
-    x: 250,              // 中心点
-    y: 515,
-    font: "16px serif",
-    color: "white",
-  }
-};
+);
+
+// ===== option =====
+ctx.font = texts.option.font;
+ctx.fillStyle = texts.option.color;
+ctx.textAlign = "center";          // ← 中央揃え
+ctx.fillText(
+  texts.option.text,
+  canvasWidth / 2,                 // ← 中央X
+  texts.option.y
+    x: 250,             
+    y: 515
+);
 
 
 // ===== 切り抜き領域 =====
